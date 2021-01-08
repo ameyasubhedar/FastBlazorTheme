@@ -8,3 +8,28 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+
+
+@code {
+
+    /// <summary>
+    /// Inject JS Interop from Razor component library.
+    /// </summary>
+    [Inject]
+    FastRazorComponentTheme.ExampleJsInterop ExampleJsInterop { get; set; }
+
+
+    /// <summary>
+    /// Initialize the design system provider.
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        //  By default we set the Dark theme ("0.23")
+        await ExampleJsInterop.InitDesignSystemProviderAsync();
+        await ExampleJsInterop.SetColorLayerLuminanceAsync("0.23");
+    }
+}

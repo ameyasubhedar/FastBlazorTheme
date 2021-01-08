@@ -17,19 +17,29 @@
     <link href="FastBlazorTheme.styles.css" rel="stylesheet" />
 </head>
 <body>
-    <component type="typeof(App)" render-mode="ServerPrerendered" />
 
-    <div id="blazor-error-ui">
-        <environment include="Staging,Production">
-            An error has occurred. This application may no longer respond until reloaded.
-        </environment>
-        <environment include="Development">
-            An unhandled exception has occurred. See browser dev tools for details.
-        </environment>
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
+    @* Enable fluent design that uses the FAST components *@
+    <fluent-design-system-provider use-defaults>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+        <div id="blazor-error-ui">
+            <environment include="Staging,Production">
+                An error has occurred. This application may no longer respond until reloaded.
+            </environment>
+            <environment include="Development">
+                An unhandled exception has occurred. See browser dev tools for details.
+            </environment>
+            <a href="" class="reload">Reload</a>
+            <a class="dismiss">🗙</a>
+        </div>
+    </fluent-design-system-provider>
 
     <script src="_framework/blazor.server.js"></script>
+
+    @* Add a reference to fluentui components *@
+    <script src="https://unpkg.com/@@fluentui/web-components" type="module"></script>
+
+    @* Include styling javascript from razor components *@
+    <script src="_content/FastRazorComponentTheme/exampleJsInterop.js" type="module"></script>
+
 </body>
 </html>
