@@ -4,13 +4,6 @@ import { neutralLayerCardContainerBehavior } from "https://unpkg.com/@fluentui/w
 import { parseColorString } from "https://unpkg.com/@fluentui/web-components";
 import { createColorPalette } from "https://unpkg.com/@microsoft/fast-components";
 
-// This is a JavaScript module that is loaded on demand. It can export any number of
-// functions, and may import other JavaScript modules if required.
-
-export function showPrompt(message) {
-    return prompt(message, 'Type anything here');
-}
-
 
 // Initialize the fast color palette with dark theme by default.
 export function initDesignSystemProvider() {
@@ -54,7 +47,7 @@ export function setColorLayerLuminance(layerLuminance) {
 
 // Update Accent color on design provider
 function updateAccentColor(designSystemProvider) {
-    var accentBaseColor = "#F33378";
+    var accentBaseColor = "#e1a054";
     designSystemProvider.accentBaseColor = accentBaseColor;
     const accentPalette = createColorPalette(parseColorString(accentBaseColor));
     designSystemProvider.accentPalette = accentPalette;

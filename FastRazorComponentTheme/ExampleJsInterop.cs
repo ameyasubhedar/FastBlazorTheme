@@ -37,12 +37,6 @@ namespace FastRazorComponentTheme
             await module.InvokeVoidAsync("initDesignSystemProvider");
         }
 
-        public async ValueTask<string> Prompt(string message)
-        {
-            var module = await moduleTask.Value;
-            return await module.InvokeAsync<string>("showPrompt", message);
-        }
-
         /// <summary>
         /// </summary>
         /// <returns></returns>

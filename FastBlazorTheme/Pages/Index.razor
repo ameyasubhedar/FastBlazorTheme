@@ -1,7 +1,92 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<div class="p-5">
+    <div style="display:grid; align-content:center; justify-items:center; margin:40px;">
+        <h2>FAST integration with Blazor Server App for Dark and Light themes.</h2>
 
-Welcome to your new app.
+        <br />
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+        <h4>
+            Integrate FAST components with Blazor Server App and demo Dark and Light themes. This demo bundles the styling into a Razor Component Library for reuse in your other Blazor or asp.net core projects.
+        </h4>
+    </div>
+
+    <div style="display:grid; align-content:center; justify-items:center; grid-row:2; margin:40px">
+
+        <div style="width:400px; height:200px" class="mb-5">
+            <fluent-card class="mb-5">
+
+                <div style="display:grid; align-content:center; justify-items:center">
+                    <div class="mt-5">
+                        <fluent-badge>
+                            Click on the buttons to toggle between Dark and Light themes
+                        </fluent-badge>
+                    </div>
+
+                    <div style="display:flex; margin:20px">
+
+                        @* Set dark mode *@
+                        <fluent-button appearance="accent" @onclick="@OnDarkModeAsync" class="mr-5">
+                            Set Dark Mode
+                        </fluent-button>
+
+                        @* Set light mode *@
+                        <fluent-button appearance="accent" @onclick="@OnLightModeAsync">
+                            Set Light Mode
+                        </fluent-button>
+                    </div>
+                </div>
+            </fluent-card>
+        </div>
+
+        <div>
+            <div style="display:grid" class="justify-content-center mb-4">
+                <fluent-text-field>
+                    Sample Text Control
+                </fluent-text-field>
+            </div>
+
+
+            @if (showIssue)
+            {
+                <div style="display:grid" class="justify-content-center">
+                    <h4 class="text-primary">
+                        Notice the text foreground color did not change for light mode. The text field and card background also did not change.
+                        I think, this is because the neutral color template is not updated.
+                    </h4>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+
+
+    /// <summary>
+    /// Inject JS Interop from Razor component library.
+    /// </summary>
+    [Inject]
+    FastRazorComponentTheme.ExampleJsInterop ExampleJsInterop { get; set; }
+
+    bool showIssue = false;
+
+
+    private async Task OnDarkModeAsync()
+    {
+        await ExampleJsInterop.SetColorLayerLuminanceAsync("0.23");
+        showIssue = false;
+
+    }
+
+
+    private async Task OnLightModeAsync()
+    {
+        await ExampleJsInterop.SetColorLayerLuminanceAsync("1");
+        showIssue = true;
+    }
+}
+
+
+
+
